@@ -4,10 +4,11 @@ const initialState = {
     movies:[]
 }
 
-export const MovieReducer= (state = initialState, action) => {
+export const movieReducer= (state = initialState, action) => {
     switch (action.type) {
 
     case actionType.GET_MOVIES:
+        console.log(action);
         return { ...state, movies: action.payload  }
 
     default:

@@ -1,0 +1,12 @@
+.favorite{
+    margin-top: 2rem;
+}
+.favorite__title{
+    color:#d5422e;
+    text-align: left;
+    font-size: 1.5rem;
+}
+.favorite__p{
+    text-align: left;
+    color: #ccc;
+}
