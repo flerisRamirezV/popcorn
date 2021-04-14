@@ -3,6 +3,8 @@ import * as actionType from "../constants/actions";
 const initialState = {
   movies: [],
   moviesRated: [],
+  filterMovie:[],
+  filterByMovie: '',
 };
 
 export const movieReducer = (state = initialState, action) => {
@@ -13,6 +15,10 @@ export const movieReducer = (state = initialState, action) => {
     case actionType.GET_MOVIES_RATED: {
       return { ...state, moviesRated: action.payload };
     }
+   
+     
+    
+    
     default:
       return state;
   }
