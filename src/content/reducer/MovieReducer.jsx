@@ -1,18 +1,19 @@
-import * as actionType from '../constants/actions';
+import * as actionType from "../constants/actions";
 
 const initialState = {
-    movies:[]
-}
+  movies: [],
+  moviesRated: [],
+};
 
-export const movieReducer= (state = initialState, action) => {
-    switch (action.type) {
-
+export const movieReducer = (state = initialState, action) => {
+  switch (action.type) {
     case actionType.GET_MOVIES:
-        console.log(action);
-        return { ...state, movies: action.payload  }
-
-    default:
-        return state
+     
+      return { ...state, movies: action.payload };
+    case actionType.GET_MOVIES_RATED: {
+      return { ...state, moviesRated: action.payload };
     }
-}
-
+    default:
+      return state;
+  }
+};
