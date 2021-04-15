@@ -5,6 +5,7 @@ const initialState = {
   moviesRated: [],
   filterMovie: [],
   filterByMovie: "",
+  
 };
 
 export const movieReducer = (state = initialState, action) => {
