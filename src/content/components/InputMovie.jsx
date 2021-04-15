@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import "../styles/movie.css";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 
 export const InputMovie = () => {
+  
   const [inputValue, setInputValue] = useState("");
   const dispatch = useDispatch();
 
   const filterByName = (e) => {
     setInputValue(e.target.value);
+    
     dispatch({
       type: "FILTER_MOVIE",
       payload: e.target.value,
