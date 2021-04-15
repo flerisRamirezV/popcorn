@@ -17,12 +17,13 @@ export const movieReducer = (state = initialState, action) => {
     }
 
     case actionType.FILTER_MOVIE: {
+     
       let list = state.movies;
       let listFiltered;
-      if (action.payload !== "") {
+      if (action.payload.name !== "") {
         listFiltered = [
-          ...list.filter((movie) =>
-            movie.title.toLowerCase().includes(action.payload.toLowerCase())
+          ...action.payload.data.filter((movie) =>
+            movie.title.toLowerCase().includes(action.payload.name.toLowerCase())
           ),
         ];
       } else {

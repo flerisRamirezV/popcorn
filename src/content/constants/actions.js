@@ -5,3 +5,4 @@ export const GET_MOVIES_RATED="GET_MOVIES_RATED";
 export const URL_API_RATED=`http://api.themoviedb.org/3/discover/movie?certification_country=US&certification=R&sort_by=vote_average.desc&api_key=${API_KEY}`
 export const FILTER_MOVIE="FILTER_MOVIE";
 export const FAVORITE_MOVIE="FAVORITE_MOVIE";
+export const URL_SEARCH_MOVIE=`https://api.themoviedb.org/3/search/movie?query`
