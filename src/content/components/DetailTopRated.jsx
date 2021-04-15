@@ -1,13 +1,12 @@
 import React from "react";
-import "../styles/modal.css";
-export const DetailMovie = (props) => {
- 
+
+export const DetailTopRated = (props) => {
   return (
     <div className="content_modal">
       <div className="modal__movie">
         <div className="card card__content">
           <div className="d-flex justify-content-end">
-            <button className="button" onClick={props.handleDetail}>
+            <button className="button" onClick={props.handleModal}>
               <i className="fas fa-times"></i>
             </button>
           </div>
@@ -32,7 +31,7 @@ export const DetailMovie = (props) => {
           <div className="d-flex justify-content-end">
             <button
               className="button"
-              onClick={()=>props.addMovieFavorite(props.detailMovie)}
+              onClick={() => props.addMovieFavorite(props.detailMovie)}
             >
               <i className="fas fa-heart favorite__icon"></i>
             </button>
