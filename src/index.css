@@ -35,4 +35,24 @@ body {
 }
 .button{
   background-color: transparent;
+  outline:none;
+  border:0;
+}
+.favorite__icon{
+  color:#d5422e;
+  font-size: 20px;
+}
+.favorite__icon:active{
+  transform: scale(1.4);
+}
+
+.movie__fav{
+  max-width:100px;
+  background-color:#d5422e;
+  color:#fff;
+  border-radius: 10px;
+  border:1px dotted #fff;
+  max-height:100px;
+  cursor: pointer; 
+
 }
