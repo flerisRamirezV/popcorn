@@ -6,7 +6,7 @@ import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 
 const initialData= save(
     {
-      states:[""
+      states:["movieFavorites"
      ]
     }    
   );
@@ -22,7 +22,7 @@ const initialData= save(
     const store = createStoreWithMiddleware(
       rootReducer,    
        load({
-            states:[""
+            states:["movieFavorites"
            ]     
        }) 
    )  
