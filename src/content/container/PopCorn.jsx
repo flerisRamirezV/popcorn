@@ -8,6 +8,7 @@ import { MoviesFavorites } from "../components/MoviesFavorites";
 import { MyFavoriteMovie } from "../components/myFavoriteMovie";
 import PopularMovies from "../components/PopularMovies";
 import TopRated from "../components/TopRated";
+import {addFavorite} from '../actions/favorite';
 
 export const PopCorn = () => {
   
@@ -39,9 +40,19 @@ export const PopCorn = () => {
       original_title: mov.original_title,
     });
   };
+
   const movieList = useSelector((state) => {
     return state.movieReducer.filterMovie;
   });
+
+  const addMovieFavorite=(mov)=>{
+    dispatch(addFavorite(mov));
+    setTimeout(()=>{
+      setModal(!modal);
+    },1000)
+  
+  }
+
   return (
     <main className="container">
       <section className="container__input-movie">
@@ -51,17 +62,13 @@ export const PopCorn = () => {
       <MyFavoriteMovie />
       <PopularMovies />
       <section className="container__movie">
-        {/* {movies.length > 0 &&
-          movies.map((movie) => <MoviesFavorites 
-            key={movie.id} {...movie} 
-            handleDetail={()=>handleDetail(movie)} 
-
-         />)} */}
+      
         {movieList.map((movie) => (
           <MoviesFavorites
             key={movie.id}
             {...movie}
-            handleDetail={() => handleDetail(movie)}
+            handleDetail={() => handleDetail(movie)
+            }
           />
         ))}
       </section>
@@ -78,6 +85,7 @@ export const PopCorn = () => {
         <DetailMovie
           handleDetail={(movie) => handleDetail(movie)}
           detailMovie={detailMovie}
+          addMovieFavorite={(mov)=>addMovieFavorite(mov)}
         />
       )}
     </main>
