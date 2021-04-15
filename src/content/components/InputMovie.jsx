@@ -14,7 +14,7 @@ export const InputMovie = () => {
       type: "FILTER_MOVIE",
       payload: e.target.value,
     });
-    // setInputValue("")
+   
   };
   return (
     <div className="container__input">
