@@ -2,8 +2,14 @@ import * as actionTypes from "../constants/actions";
 import { fixedEncodeURIComponent, sendHttpRequest } from "../helpers/request";
 
 export const filterData = (name) => async (dispatch) => {
+  let query = "";
+  if (name === "") {
+    query = "?";
+  } else {
+    query = name;
+  }
   let url = `${actionTypes.URL_SEARCH_MOVIE}=${fixedEncodeURIComponent(
-    name
+    query
   )}&api_key=${actionTypes.API_KEY}`;
   const responseData = await sendHttpRequest(url);
 
