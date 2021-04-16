@@ -19,6 +19,7 @@ body {
   overflow: hidden;
   border-radius: 7px;
   cursor: pointer;
+  position: relative;
 }
 .image {
   object-fit: cover;
@@ -66,4 +67,9 @@ body {
 .container__overflow::-webkit-scrollbar {
   display: none;
 }
-
+.icon__popular--movie{
+  position: absolute;
+  font-size:1.5rem;
+  right:2px;
+  color: #fff;
+}
