@@ -15,7 +15,7 @@ export const PopCorn = () => {
   const moviesTop = useSelector((state) => state.movieReducer.moviesRated);
   const [modal, setModal] = useState(false);
   const [modalRated, setModalRated] = useState(false);
-
+ 
   const [detailMovie, setDetailMovie] = useState({
     backdrop_path: "",
     id: null,
@@ -23,6 +23,7 @@ export const PopCorn = () => {
     overview: "",
     original_title: "",
     poster_path: "",
+    icon:false
   });
   const dispatch = useDispatch();
 
@@ -33,7 +34,6 @@ export const PopCorn = () => {
 
   const handleDetail = (mov) => {
     setModal(!modal);
-
     setDetailMovie({
       backdrop_path: mov.backdrop_path,
       id: mov.id,
@@ -41,10 +41,15 @@ export const PopCorn = () => {
       overview: mov.overview,
       original_title: mov.original_title,
       poster_path: mov.poster_path,
+     
     });
+   
+     
   };
   const handleModal = (mov) => {
     setModalRated(!modalRated);
+   
+   
     setDetailMovie({
       backdrop_path: mov.backdrop_path,
       id: mov.id,
@@ -52,6 +57,7 @@ export const PopCorn = () => {
       overview: mov.overview,
       original_title: mov.original_title,
     });
+   
   };
   const movieList = useSelector((state) => {
     return state.movieReducer.filterMovie;
@@ -69,6 +75,8 @@ export const PopCorn = () => {
       setModalRated(!modalRated);
     }, 1000);
   };
+
+  
   return (
     <main className="container">
       <section className="container__input-movie">
@@ -77,7 +85,7 @@ export const PopCorn = () => {
 
       <MyFavoriteMovie />
       <PopularMovies />
-      <section className="container__movie">
+      <section className="container__overflow">
         {movieList.map((movie) => (
           <MoviesFavorites
             key={movie.id}
@@ -89,7 +97,7 @@ export const PopCorn = () => {
 
       <TopRated />
 
-      <section className="container__movie">
+      <section className="container__overflow">
         {moviesTop.length > 0 &&
           moviesTop.map((movie) => (
             <MovieRated
@@ -106,6 +114,7 @@ export const PopCorn = () => {
           handleDetail={(movie) => handleDetail(movie)}
           detailMovie={detailMovie}
           addMovieFavorite={(mov) => addMovieFavorite(mov)}
+          
         />
       )}
       {modalRated && (
@@ -113,8 +122,10 @@ export const PopCorn = () => {
           handleModal={(mov) => handleModal(mov)}
           detailMovie={detailMovie}
           addMovieFavorite={(mov) => addMovieFavoriteRaTed(mov)}
+         
         />
       )}
+      
     </main>
   );
 };

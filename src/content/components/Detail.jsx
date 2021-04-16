@@ -1,14 +1,17 @@
 import React from "react";
 import "../styles/modal.css";
+import {useSelector} from 'react-redux';
+
 export const DetailMovie = (props) => {
- 
+  // console.log("favor",props )
+
   return (
     <div className="content_modal">
       <div className="modal__movie">
         <div className="card card__content">
           <div className="d-flex justify-content-end">
             <button className="button" onClick={props.handleDetail}>
-              <i className="fas fa-times"></i>
+               <i className="fas fa-times"></i>
             </button>
           </div>
           <div className="card-body">
@@ -30,12 +33,14 @@ export const DetailMovie = (props) => {
             </p>
           </div>
           <div className="d-flex justify-content-end">
-            <button
+           <button
               className="button"
               onClick={()=>props.addMovieFavorite(props.detailMovie)}
             >
-              <i className="fas fa-heart favorite__icon"></i>
+               <i className="fas fa-heart favorite__icon"></i>
             </button>
+            
+          
           </div>
         </div>
       </div>
