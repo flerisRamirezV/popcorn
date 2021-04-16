@@ -3,19 +3,17 @@ import { useSelector, useDispatch } from "react-redux";
 import { getMovies, getMoviesRated } from "../actions/getMovies";
 import { DetailMovie } from "../components/Detail";
 import { InputMovie } from "../components/InputMovie";
-import { MovieRated } from "../components/MovieRated";
 import { MoviesFavorites } from "../components/MoviesFavorites";
 import { MyFavoriteMovie } from "../components/myFavoriteMovie";
 import PopularMovies from "../components/PopularMovies";
 import TopRated from "../components/TopRated";
 import { addFavorite } from "../actions/favorite";
-import { DetailTopRated } from "../components/DetailTopRated";
+
 
 export const PopCorn = () => {
+  
   const moviesTop = useSelector((state) => state.movieReducer.moviesRated);
   const [modal, setModal] = useState(false);
-  const [modalRated, setModalRated] = useState(false);
- 
   const [detailMovie, setDetailMovie] = useState({
     backdrop_path: "",
     id: null,
@@ -23,8 +21,9 @@ export const PopCorn = () => {
     overview: "",
     original_title: "",
     poster_path: "",
-    icon:false
+    icon: false,
   });
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -41,24 +40,9 @@ export const PopCorn = () => {
       overview: mov.overview,
       original_title: mov.original_title,
       poster_path: mov.poster_path,
-     
     });
-   
-     
   };
-  const handleModal = (mov) => {
-    setModalRated(!modalRated);
-   
-   
-    setDetailMovie({
-      backdrop_path: mov.backdrop_path,
-      id: mov.id,
-      original_language: mov.original_language,
-      overview: mov.overview,
-      original_title: mov.original_title,
-    });
-   
-  };
+  
   const movieList = useSelector((state) => {
     return state.movieReducer.filterMovie;
   });
@@ -69,14 +53,8 @@ export const PopCorn = () => {
       setModal(!modal);
     }, 1000);
   };
-  const addMovieFavoriteRaTed = (mov) => {
-    dispatch(addFavorite(mov));
-    setTimeout(() => {
-      setModalRated(!modalRated);
-    }, 1000);
-  };
+ 
 
-  
   return (
     <main className="container">
       <section className="container__input-movie">
@@ -100,10 +78,11 @@ export const PopCorn = () => {
       <section className="container__overflow">
         {moviesTop.length > 0 &&
           moviesTop.map((movie) => (
-            <MovieRated
+          
+            <MoviesFavorites
               key={movie.id}
               {...movie}
-              handleModal={() => handleModal(movie)}
+              handleDetail={() => handleDetail(movie)}
             />
           ))}
       </section>
@@ -114,18 +93,16 @@ export const PopCorn = () => {
           handleDetail={(movie) => handleDetail(movie)}
           detailMovie={detailMovie}
           addMovieFavorite={(mov) => addMovieFavorite(mov)}
-          
         />
       )}
-      {modalRated && (
-        <DetailTopRated
-          handleModal={(mov) => handleModal(mov)}
+      {modal && (
+        <DetailMovie
+          handleDetail={(movie) => handleDetail(movie)}
           detailMovie={detailMovie}
-          addMovieFavorite={(mov) => addMovieFavoriteRaTed(mov)}
-         
+          addMovieFavorite={(mov) => addMovieFavorite(mov)}
         />
-      )}
       
+      )}
     </main>
   );
 };

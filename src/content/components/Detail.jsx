@@ -1,23 +1,24 @@
 import React from "react";
 import "../styles/modal.css";
-import {useSelector} from 'react-redux';
 
 export const DetailMovie = (props) => {
-  // console.log("favor",props )
-
   return (
     <div className="content_modal">
       <div className="modal__movie">
         <div className="card card__content">
           <div className="d-flex justify-content-end">
             <button className="button" onClick={props.handleDetail}>
-               <i className="fas fa-times"></i>
+              <i className="fas fa-times"></i>
             </button>
           </div>
           <div className="card-body">
             <img
               className="img__modal"
-              src={`https://image.tmdb.org/t/p/w500/${props.detailMovie.backdrop_path}`}
+              src={
+                props.detailMovie.backdrop_path == null
+                  ? `https://image.tmdb.org/t/p/w500${props.detailMovie.poster_path}`
+                  : `https://image.tmdb.org/t/p/w500/${props.detailMovie.backdrop_path}`
+              }
               alt="movie"
             />
             <p>
@@ -33,14 +34,12 @@ export const DetailMovie = (props) => {
             </p>
           </div>
           <div className="d-flex justify-content-end">
-           <button
+            <button
               className="button"
-              onClick={()=>props.addMovieFavorite(props.detailMovie)}
+              onClick={() => props.addMovieFavorite(props.detailMovie)}
             >
-               <i className="fas fa-heart favorite__icon"></i>
+              <i className="fas fa-heart favorite__icon"></i>
             </button>
-            
-          
           </div>
         </div>
       </div>
