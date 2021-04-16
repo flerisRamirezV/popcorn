@@ -8,21 +8,11 @@ import { MyFavoriteMovie } from "../components/myFavoriteMovie";
 import PopularMovies from "../components/PopularMovies";
 import TopRated from "../components/TopRated";
 import { addFavorite } from "../actions/favorite";
-
+import {saveMovieFavorite} from '../actions/favorite';
 
 export const PopCorn = () => {
-  
   const moviesTop = useSelector((state) => state.movieReducer.moviesRated);
   const [modal, setModal] = useState(false);
-  const [detailMovie, setDetailMovie] = useState({
-    backdrop_path: "",
-    id: null,
-    original_language: "",
-    overview: "",
-    original_title: "",
-    poster_path: "",
-    icon: false,
-  });
 
   const dispatch = useDispatch();
 
@@ -33,14 +23,8 @@ export const PopCorn = () => {
 
   const handleDetail = (mov) => {
     setModal(!modal);
-    setDetailMovie({
-      backdrop_path: mov.backdrop_path,
-      id: mov.id,
-      original_language: mov.original_language,
-      overview: mov.overview,
-      original_title: mov.original_title,
-      poster_path: mov.poster_path,
-    });
+    
+    dispatch(saveMovieFavorite(mov))
   };
   
   const movieList = useSelector((state) => {
@@ -91,14 +75,13 @@ export const PopCorn = () => {
       {modal && (
         <DetailMovie
           handleDetail={(movie) => handleDetail(movie)}
-          detailMovie={detailMovie}
+          
           addMovieFavorite={(mov) => addMovieFavorite(mov)}
         />
       )}
       {modal && (
         <DetailMovie
           handleDetail={(movie) => handleDetail(movie)}
-          detailMovie={detailMovie}
           addMovieFavorite={(mov) => addMovieFavorite(mov)}
         />
       

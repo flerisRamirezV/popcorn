@@ -1,7 +1,9 @@
 import React from "react";
 import "../styles/modal.css";
+import {useSelector} from 'react-redux';
 
 export const DetailMovie = (props) => {
+  const detailMovie = useSelector(state => state.movieFavorites.saveFavorite)
   return (
     <div className="content_modal">
       <div className="modal__movie">
@@ -15,28 +17,28 @@ export const DetailMovie = (props) => {
             <img
               className="img__modal"
               src={
-                props.detailMovie.backdrop_path == null
-                  ? `https://image.tmdb.org/t/p/w500${props.detailMovie.poster_path}`
-                  : `https://image.tmdb.org/t/p/w500/${props.detailMovie.backdrop_path}`
+                detailMovie.backdrop_path == null
+                  ? `https://image.tmdb.org/t/p/w500${detailMovie.poster_path}`
+                  : `https://image.tmdb.org/t/p/w500/${detailMovie.backdrop_path}`
               }
               alt="movie"
             />
             <p>
-              <b>Titulo:</b> <span>{props.detailMovie.original_title}</span>
+              <b>Titulo:</b> <span>{detailMovie.original_title}</span>
             </p>
             <p>
               <b>Lenguaje:</b>{" "}
-              {props.detailMovie.original_language.toUpperCase()}
+              {detailMovie.original_language.toUpperCase()}
             </p>
             <p>
               <b>Información:</b>
-              {props.detailMovie.overview.slice(0, 100)}
+              {detailMovie.overview.slice(0, 100)}
             </p>
           </div>
           <div className="d-flex justify-content-end">
             <button
               className="button"
-              onClick={() => props.addMovieFavorite(props.detailMovie)}
+              onClick={() => props.addMovieFavorite(detailMovie)}
             >
               <i className="fas fa-heart favorite__icon"></i>
             </button>

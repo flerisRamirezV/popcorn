@@ -9,3 +9,4 @@ export const URL_SEARCH_MOVIE=`https://api.themoviedb.org/3/search/movie?query`;
 export const NO_FAVORITE="NO_FAVORITE";
 export const FIND_FAVORITE="FIND_FAVORITE";
 export const DELETE_FAVORITE="DELETE_FAVORITE"
+export const SAVE_MOVIE="SAVE_MOVIE";

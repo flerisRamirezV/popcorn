@@ -24,3 +24,10 @@ export const deleteMovie = (id)=>(dispatch)=>{
    })
     
 }
+
+export const saveMovieFavorite=(movie)=>dispatch=>{
+    dispatch({
+        type:actionTypes.SAVE_MOVIE,
+        payload:movie
+    })
+}
