@@ -3,7 +3,8 @@ import * as actionType from "../constants/actions";
 const initialState = {
   favorite: [],
   noFavorite: [],
-  saveFavorite:null,
+  saveFavorite: null,
+  modal: false,
 };
 
 export const movieFavorites = (state = initialState, action) => {
@@ -16,8 +17,9 @@ export const movieFavorites = (state = initialState, action) => {
         favorite: state.favorite.filter((fav) => fav.id !== action.payload),
       };
     case actionType.SAVE_MOVIE:
-      
-        return{...state, saveFavorite: action.payload}
+      return { ...state, saveFavorite: action.payload };
+    case actionType.TOGGLE_MODAL:
+      return { ...state, modal: !state.modal };
     default:
       return state;
   }

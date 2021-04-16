@@ -9,10 +9,11 @@ import PopularMovies from "../components/PopularMovies";
 import TopRated from "../components/TopRated";
 import { addFavorite } from "../actions/favorite";
 import {saveMovieFavorite} from '../actions/favorite';
-
+import {toogleModal} from '../helpers/events'
 export const PopCorn = () => {
   const moviesTop = useSelector((state) => state.movieReducer.moviesRated);
-  const [modal, setModal] = useState(false);
+  const modal = useSelector(state => state.movieFavorites.modal);
+  
 
   const dispatch = useDispatch();
 
@@ -22,7 +23,7 @@ export const PopCorn = () => {
   }, []);
 
   const handleDetail = (mov) => {
-    setModal(!modal);
+    dispatch(toogleModal(!modal));
     
     dispatch(saveMovieFavorite(mov))
   };
@@ -34,7 +35,7 @@ export const PopCorn = () => {
   const addMovieFavorite = (mov) => {
     dispatch(addFavorite(mov));
     setTimeout(() => {
-      setModal(!modal);
+     dispatch(toogleModal(!modal)) ;
     }, 1000);
   };
  
