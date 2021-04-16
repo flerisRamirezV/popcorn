@@ -12,3 +12,10 @@ export const filterData = (name) => async (dispatch) => {
     payload: { data: responseData.results, name: name },
   });
 };
+
+export const saveDataInput = (data) => (dispatch) => {
+  dispatch({
+    type: actionTypes.SAVE_DATA_INPUT,
+    payload: data,
+  });
+};
