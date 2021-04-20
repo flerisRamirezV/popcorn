@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getMovies, getMoviesRated } from "../actions/getMovies";
+import { getMovies, getMoviesRated, getMovie } from "../actions/getMovies";
 import { DetailMovie } from "../components/Detail";
 import { InputMovie } from "../components/InputMovie";
 import { MoviesFavorites } from "../components/MoviesFavorites";
@@ -9,18 +9,21 @@ import PopularMovies from "../components/PopularMovies";
 import TopRated from "../components/TopRated";
 import { addFavorite } from "../actions/favorite";
 import {saveMovieFavorite} from '../actions/favorite';
-import {toogleModal} from '../helpers/events'
+import {toogleModal} from '../helpers/events';
+import tryMovieList from '../sagas/movies/list';
 export const PopCorn = () => {
   const moviesTop = useSelector((state) => state.movieReducer.moviesRated);
   const modal = useSelector(state => state.movieFavorites.modal);
   
 
   const dispatch = useDispatch();
-
+  // 
   useEffect(() => {
-    dispatch(getMovies());
-    dispatch(getMoviesRated());
-  }, []);
+     
+     dispatch(getMovie());
+      dispatch(getMoviesRated());
+  
+  }, [dispatch]);
 
   const handleDetail = (mov) => {
     dispatch(toogleModal(!modal));
@@ -38,7 +41,7 @@ export const PopCorn = () => {
      dispatch(toogleModal(!modal)) ;
     }, 1000);
   };
- 
+
 
   return (
     <main className="container">
@@ -48,15 +51,15 @@ export const PopCorn = () => {
 
       <MyFavoriteMovie />
       <PopularMovies />
-      <section className="container__overflow">
-        {movieList.map((movie) => (
+      {/* <section className="container__overflow">
+         {movieList.length > 0&&movieList.map((movie) => (
           <MoviesFavorites
             key={movie.id}
             {...movie}
             handleDetail={() => handleDetail(movie)}
           />
-        ))}
-      </section>
+        ))} 
+      </section> */}
 
       <TopRated />
 
