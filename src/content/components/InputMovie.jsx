@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/movie.css";
 import { useDispatch,useSelector } from "react-redux";
-import {filterData, saveDataInput} from '../actions/filterData';
+import { saveDataInput, filterMovieData} from '../actions/filterData';
 
 export const InputMovie = () => {
   
@@ -12,7 +12,8 @@ export const InputMovie = () => {
     dispatch(saveDataInput(e.target.value))
    
     setTimeout(()=>{
-      dispatch(filterData(e.target.value));
+      
+      dispatch(filterMovieData(e.target.value));
     },1000)
      
   };
