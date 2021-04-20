@@ -25,3 +25,10 @@ export const saveDataInput = (data) => (dispatch) => {
     payload: data,
   });
 };
+
+export const filterMovieData = (name) => {
+  return {
+    type: actionTypes.FILTER_MOVIE,
+    name,
+  };
+};
