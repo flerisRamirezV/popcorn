@@ -9,20 +9,21 @@ const initialState = {
 
 export const movieReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionType.GET_MOVIES:
+    case actionType.LIST_MOVIE: {
       return { ...state, movies: action.payload, filterMovie: action.payload };
-    case actionType.GET_MOVIES_RATED: {
-      return { ...state, moviesRated: action.payload };
     }
+    case actionType.LIST_MOVIE_RAITED:
+      return { ...state, moviesRated: action.payload };
 
-    case actionType.FILTER_MOVIE: {
-     
+    case actionType.SAVE_DATA_FILTER_MOVIE: {
       let list = state.movies;
       let listFiltered;
-      if (action.payload.name !== "") {
+      if (action.payload.name.name !== "") {
         listFiltered = [
           ...action.payload.data.filter((movie) =>
-            movie.title.toLowerCase().includes(action.payload.name.toLowerCase())
+            movie.title
+              .toLowerCase()
+              .includes(action.payload.name.name.toLowerCase())
           ),
         ];
       } else {
@@ -30,6 +31,7 @@ export const movieReducer = (state = initialState, action) => {
       }
       return { ...state, filterMovie: listFiltered, movies: list };
     }
+
     default:
       return state;
   }
