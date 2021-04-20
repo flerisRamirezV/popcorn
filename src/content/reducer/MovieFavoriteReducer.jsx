@@ -11,8 +11,10 @@ const initialState = {
 export const movieFavorites = (state = initialState, action) => {
   switch (action.type) {
     case actionType.FAVORITE_MOVIE:
+      console.log("ACYION_MOVIE", action.payload)
       return { ...state, favorite: [...state.favorite, action.payload] };
-
+    case actionType.LIST_MOVIE:
+        return{...state, movie: action.payload}
     case actionType.DELETE_FAVORITE:
       return {
         ...state,
@@ -20,7 +22,8 @@ export const movieFavorites = (state = initialState, action) => {
       };
 
     case actionType.SAVE_MOVIE:
-      return { ...state, saveFavorite: action.payload };
+      
+      return { ...state, saveFavorite: action.payload.mov };
 
     case actionType.TOGGLE_MODAL:
       return { ...state, modal: !state.modal };
