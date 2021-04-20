@@ -8,29 +8,26 @@ import { MyFavoriteMovie } from "../components/myFavoriteMovie";
 import PopularMovies from "../components/PopularMovies";
 import TopRated from "../components/TopRated";
 import { addFavorite } from "../actions/favorite";
-import {saveMovieFavorite} from '../actions/favorite';
-import {toogleModal} from '../helpers/events';
-import tryMovieList from '../sagas/movies/list';
+import { saveMovieFavorite } from "../actions/favorite";
+import { toogleModal } from "../helpers/events";
+import tryMovieList from "../sagas/movies/list";
 export const PopCorn = () => {
   const moviesTop = useSelector((state) => state.movieReducer.moviesRated);
-  const modal = useSelector(state => state.movieFavorites.modal);
-  
+  const modal = useSelector((state) => state.movieFavorites.modal);
 
   const dispatch = useDispatch();
-  // 
+  //
   useEffect(() => {
-     
-     dispatch(getMovie());
-      dispatch(getMoviesRated());
-  
+    dispatch(getMovie());
+    dispatch(getMoviesRated());
   }, [dispatch]);
 
   const handleDetail = (mov) => {
     dispatch(toogleModal(!modal));
-    
-    dispatch(saveMovieFavorite(mov))
+
+    dispatch(saveMovieFavorite(mov));
   };
-  
+
   const movieList = useSelector((state) => {
     return state.movieReducer.filterMovie;
   });
@@ -38,10 +35,9 @@ export const PopCorn = () => {
   const addMovieFavorite = (mov) => {
     dispatch(addFavorite(mov));
     setTimeout(() => {
-     dispatch(toogleModal(!modal)) ;
+      dispatch(toogleModal(!modal));
     }, 1000);
   };
-
 
   return (
     <main className="container">
@@ -51,22 +47,22 @@ export const PopCorn = () => {
 
       <MyFavoriteMovie />
       <PopularMovies />
-      {/* <section className="container__overflow">
-         {movieList.length > 0&&movieList.map((movie) => (
-          <MoviesFavorites
-            key={movie.id}
-            {...movie}
-            handleDetail={() => handleDetail(movie)}
-          />
-        ))} 
-      </section> */}
+      <section className="container__overflow">
+        {movieList.length > 0 &&
+          movieList.map((movie) => (
+            <MoviesFavorites
+              key={movie.id}
+              {...movie}
+              handleDetail={() => handleDetail(movie)}
+            />
+          ))}
+      </section>
 
       <TopRated />
 
       <section className="container__overflow">
         {moviesTop.length > 0 &&
           moviesTop.map((movie) => (
-          
             <MoviesFavorites
               key={movie.id}
               {...movie}
@@ -79,7 +75,6 @@ export const PopCorn = () => {
       {modal && (
         <DetailMovie
           handleDetail={(movie) => handleDetail(movie)}
-          
           addMovieFavorite={(mov) => addMovieFavorite(mov)}
         />
       )}
@@ -88,7 +83,6 @@ export const PopCorn = () => {
           handleDetail={(movie) => handleDetail(movie)}
           addMovieFavorite={(mov) => addMovieFavorite(mov)}
         />
-      
       )}
     </main>
   );
