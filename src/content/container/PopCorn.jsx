@@ -8,7 +8,7 @@ import { MyFavoriteMovie } from "../components/myFavoriteMovie";
 import PopularMovies from "../components/PopularMovies";
 import TopRated from "../components/TopRated";
 import { addFavorite } from "../actions/favorite";
-import { saveMovieFavorite } from "../actions/favorite";
+import { movieFavorite } from "../actions/favorite";
 import { toogleModal } from "../helpers/events";
 import tryMovieList from "../sagas/movies/list";
 export const PopCorn = () => {
@@ -24,8 +24,7 @@ export const PopCorn = () => {
 
   const handleDetail = (mov) => {
     dispatch(toogleModal(!modal));
-
-    dispatch(saveMovieFavorite(mov));
+    dispatch(movieFavorite(mov));
   };
 
   const movieList = useSelector((state) => {
