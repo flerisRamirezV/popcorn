@@ -20,6 +20,13 @@ export const deleteMovie = (id) => (dispatch) => {
   });
 };
 
+export const deleteMovieFavorite = (id) => {
+  return {
+    type: actionTypes.DELETE_MOVIE,
+    id,
+  };
+};
+
 export const saveMovieFavorite = (movie) => (dispatch) => {
   dispatch({
     type: actionTypes.SAVE_MOVIE,
