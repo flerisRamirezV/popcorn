@@ -1,7 +1,7 @@
-import { put, takeLatest } from "redux-saga/effects";
+import { put, takeLatest, all } from "redux-saga/effects";
 
 import * as actionTypes from "../../constants/actions";
-import { saveMovieFavorite } from "../../actions/favorite";
+import { saveMovieFavorite,deleteMovie } from "../../actions/favorite";
 
 function* saveFavoriteMovie(data) {
   try {
@@ -11,6 +11,21 @@ function* saveFavoriteMovie(data) {
   }
 }
 
-export function* saveMovieWatcher() {
-  yield takeLatest(actionTypes.SAVE_FAVORITE_MOVIE, saveFavoriteMovie);
+function* deleteMovieFavorite(data){
+   
+    try {
+        yield put(deleteMovie(data.id))
+    } catch (error) {
+        console.log(error)
+    }
 }
+
+export function* movieFavoriteWatcher() {
+   
+    yield all([
+        yield takeLatest(actionTypes.SAVE_FAVORITE_MOVIE, saveFavoriteMovie),
+        yield takeLatest(actionTypes.DELETE_MOVIE, deleteMovieFavorite)
+    ])
+ 
+}
+
