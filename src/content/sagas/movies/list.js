@@ -1,16 +1,15 @@
-import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
+import { call, put, all, takeLatest } from "redux-saga/effects";
 import * as actionTypes from "../../constants/actions";
 import { sendHttpRequest } from "../../helpers/request";
-import {delay} from '../../helpers/events';
+import { delay } from "../../helpers/events";
 
 function* tryMovieList() {
   try {
-     yield call(delay, 2000);
-     const data = yield call(sendHttpRequest, actionTypes.URL);
+    yield call(delay, 2000);
+    const data = yield call(sendHttpRequest, actionTypes.URL);
     yield put({ type: actionTypes.LIST_MOVIE, payload: data.results });
   } catch (error) {
     console.log(error);
-  
   }
 }
 function* tryMovieListRated() {
@@ -24,8 +23,8 @@ function* tryMovieListRated() {
 }
 
 export function* moviesSagasWatcher() {
-  yield takeLatest(actionTypes.GET_MOVIES, tryMovieList);
-}
-export function* moviesRatedSagasWatcher() {
-  yield takeLatest(actionTypes.GET_MOVIES_RATED, tryMovieListRated);
+  all([
+    yield takeLatest(actionTypes.GET_MOVIES, tryMovieList),
+    yield takeLatest(actionTypes.GET_MOVIES_RATED, tryMovieListRated),
+  ]);
 }
