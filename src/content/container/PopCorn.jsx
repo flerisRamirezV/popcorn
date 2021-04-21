@@ -10,11 +10,11 @@ import TopRated from "../components/TopRated";
 import { addFavorite } from "../actions/favorite";
 import { movieFavorite } from "../actions/favorite";
 import { toogleModal } from "../helpers/events";
-import tryMovieList from "../sagas/movies/list";
+import { Loading } from "../ui/Loading";
 export const PopCorn = () => {
   const moviesTop = useSelector((state) => state.movieReducer.moviesRated);
   const modal = useSelector((state) => state.movieFavorites.modal);
-
+  const state = useSelector((state) => state.movieReducer.state);
   const dispatch = useDispatch();
   //
   useEffect(() => {
@@ -46,6 +46,8 @@ export const PopCorn = () => {
 
       <MyFavoriteMovie />
       <PopularMovies />
+      {state === "PENDING" && <Loading />}
+
       <section className="container__overflow">
         {movieList.length > 0 &&
           movieList.map((movie) => (
