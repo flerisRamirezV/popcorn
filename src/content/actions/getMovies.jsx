@@ -38,3 +38,10 @@ export const getMovieRated = (payload) => {
     payload,
   };
 };
+
+export const getListData = (action,data) => {
+  return {
+    type: action,
+    payload: data.results,
+  };
+};
