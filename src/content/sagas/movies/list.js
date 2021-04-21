@@ -1,10 +1,12 @@
 import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
 import * as actionTypes from "../../constants/actions";
 import { sendHttpRequest } from "../../helpers/request";
+import {delay} from '../../helpers/events';
 
 function* tryMovieList() {
   try {
-    const data = yield call(sendHttpRequest, actionTypes.URL);
+     yield call(delay, 2000);
+     const data = yield call(sendHttpRequest, actionTypes.URL);
     yield put({ type: actionTypes.LIST_MOVIE, payload: data.results });
   } catch (error) {
     console.log(error);
