@@ -4,7 +4,7 @@ import {
   sendHttpRequest,
   fixedEncodeURIComponent,
 } from "../../helpers/request";
-
+import {saveDataFilter} from '../../actions/filterData'
 
 function* searchMovies(name) {
   
@@ -20,10 +20,7 @@ function* searchMovies(name) {
     )}&api_key=${actionTypes.API_KEY}`;
     const data = yield call(sendHttpRequest, url);
    
-      yield put({
-      type: actionTypes.SAVE_DATA_FILTER_MOVIE,
-      payload: { data: data.results, name: name },
-    });
+      yield put(saveDataFilter(name, data));
     
   } catch (error) {
     console.log("ERROR_BUSCAR", error);

@@ -32,3 +32,10 @@ export const filterMovieData = (name) => {
     name,
   };
 };
+
+export const saveDataFilter=(name, data)=>{
+  return{
+    type:actionTypes.SAVE_DATA_FILTER_MOVIE,
+    payload: { data: data.results, name: name }
+  }
+}
