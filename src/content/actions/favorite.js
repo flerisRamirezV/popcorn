@@ -1,18 +1,27 @@
 import * as actionTypes from "../constants/actions";
 
-export const addFavorite = (data) => (dispatch, getState) => {
-  let favorite = [...getState().movieFavorites.favorite];
-  for (const iterator of favorite) {
-    if (iterator.id == data.id) {
-      return;
-    }
-  }
-  dispatch({
-    type: actionTypes.FAVORITE_MOVIE,
-    payload: data,
-  });
+export const addFavorite = (data) => {
+  return {
+    type: actionTypes.ADD_MOVIE_FAVORITE,
+    data,
+  };
 };
 
+export const addMovieFavorite = (data) => {
+  return {
+    type: actionTypes.FAVORITE_MOVIE,
+    payload: data,
+  };
+};
+
+export const arrayFavorite = (array, favorite) => {
+  for (const iterator of favorite) {
+    if (iterator.id === array.data.id) {
+      return true;
+    }
+  }
+  return false;
+};
 export const deleteMovie = (id) => (dispatch) => {
   dispatch({
     type: actionTypes.DELETE_FAVORITE,
