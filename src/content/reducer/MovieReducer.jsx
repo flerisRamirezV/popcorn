@@ -1,16 +1,22 @@
 import * as actionType from "../constants/actions";
 
+
 const initialState = {
   movies: [],
   moviesRated: [],
   filterMovie: [],
   filterByMovie: "",
+  state:"BASIC",
 };
 
 export const movieReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionType.LIST_MOVIE: {
-      return { ...state, movies: action.payload, filterMovie: action.payload };
+      return { ...state, movies: action.payload, 
+              filterMovie: action.payload, state:"RESULT" };
+    }
+    case actionType.GET_MOVIES: {
+      return { ...state, state:"PENDING" };
     }
     case actionType.LIST_MOVIE_RAITED:
       return { ...state, moviesRated: action.payload };
